@@ -1,7 +1,8 @@
 import request from 'supertest';
 import { CreateCourseModel } from '../../src/models/CreateCourseModel';
 import { UpdateCourseModel } from '../../src/models/UpdateCourseModel';
-import { HTTP_STATUSES, app } from '../../src/app';
+import { app } from '../../src/app';
+import { HTTP_STATUSES } from '../../src/routes/courses';
 
 describe('/course', () => {
     beforeAll(async() => {
@@ -145,4 +146,8 @@ describe('/course', () => {
         .expect(HTTP_STATUSES.OK_200, []);
 
     })
+
+    // afterAll(done => {
+    //     done();
+    // })
 })

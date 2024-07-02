@@ -1,15 +1,16 @@
 import express from 'express';
-import { addCoursesRoutes } from './routes/courses';
-import { db, HTTP_STATUSES } from './routes/courses';
+import { getCoursesRouter } from './routes/courses';
+import { getTestsRouter } from './routes/tests';
+import { db } from './db/db';
+import { getInterestingRouter } from './routes/getInterestingRouter';
+// import { db, HTTP_STATUSES } from './routes/courses';
 
 export const app = express();
 
 const jsonBodyMiddleware = express.json();
 app.use(jsonBodyMiddleware);
 
-addCoursesRoutes(app);
+app.use('/interesting', getInterestingRouter(db));
+app.use('/courses', getCoursesRouter(db));
+app.use('/__test__', getTestsRouter(db));
 
-app.delete('/__test__/data', (req: any, res: any) => {
-    db.courses = [];
-    res.sendStatus(HTTP_STATUSES.NO_CONTENT_204);
-});

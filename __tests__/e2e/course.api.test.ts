@@ -2,7 +2,7 @@ import request from 'supertest';
 import { CreateCourseModel } from '../../src/models/CreateCourseModel';
 import { UpdateCourseModel } from '../../src/models/UpdateCourseModel';
 import { app } from '../../src/app';
-import { HTTP_STATUSES } from '../../src/routes/courses';
+import { HTTP_STATUSES } from '../../src/utils';
 
 describe('/course', () => {
     beforeAll(async() => {

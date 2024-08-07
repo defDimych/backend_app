@@ -1,6 +1,6 @@
-import { DBType } from "../db/db";
 import express from 'express';
 import { HTTP_STATUSES } from "../utils";
+import { DBType } from '../db/db-in-memory';
 
 export const getTestsRouter = (db: DBType) => {
     const router = express.Router();

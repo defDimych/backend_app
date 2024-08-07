@@ -1,16 +1,27 @@
+import { MongoClient } from "mongodb";
+
+const mongoUri = process.env.mongoURI || 'mongodb://0.0.0.0:27017';
+
+const client = new MongoClient(mongoUri);
+
+const db = client.db('it-incubator');
+export const coursesCollection = db.collection<courseType>('courses');
+
+export async function runDb() {
+    try {
+        await client.connect();
+        await client.db('it-incubator').command({ ping: 1 });
+
+        console.log('Connected successfully to mongo server');
+    } catch {
+        console.log("Can't connect to db");
+
+        await client.close();
+    }
+}
+
 export type courseType = {
     id: number;
     title: string;
     studentsCount: number;
 };
-
-export const db: DBType = {
-    courses: [
-        { id: 1, title: 'front-end', studentsCount: 10 },
-        { id: 2, title: 'back-end', studentsCount: 10 },
-        { id: 3, title: 'automation qa', studentsCount: 10 },
-        { id: 4, title: 'devops', studentsCount: 10 }
-    ]
-};
-
-export type DBType = { courses: courseType[] }

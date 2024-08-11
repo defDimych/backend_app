@@ -1,4 +1,4 @@
-import { coursesCollection, courseType } from "../db/db";
+import { courseType } from "../db/db";
 import { coursesRepository } from "../repositories/courses-db-repository";
 
 export const coursesService = {
@@ -22,12 +22,10 @@ export const coursesService = {
     },
 
     async updateCourse(id: number, title: string): Promise<boolean> {
-        const result = await coursesCollection.updateOne({id}, { $set: {title} });
-        return result.matchedCount === 1;
+        return await coursesRepository.updateCourse(id, title);
     },
 
     async deleteCourse(id: number): Promise<boolean> {
-        const result = await coursesCollection.deleteOne({ id });
-        return result.deletedCount === 1;
+        return await coursesRepository.deleteCourse(id);
     }
 }

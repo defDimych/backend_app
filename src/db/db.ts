@@ -1,4 +1,5 @@
 import { MongoClient } from "mongodb";
+import { userDBType } from "../repositories/types";
 
 const mongoUri = process.env.mongoURI || 'mongodb://0.0.0.0:27017';
 
@@ -6,6 +7,7 @@ const client = new MongoClient(mongoUri);
 
 const db = client.db('it-incubator');
 export const coursesCollection = db.collection<courseType>('courses');
+export const usersCollection = db.collection<userDBType>('users');
 
 export async function runDb() {
     try {

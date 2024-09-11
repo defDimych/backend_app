@@ -1,6 +1,6 @@
 import { ObjectId } from "mongodb"
 import bcrypt from 'bcrypt';
-import { userDBType } from "../repositories/types";
+import { userDBType } from "../repositories/types/user-db-type";
 import { usersRepository } from "../repositories/users-repository";
 
 export const usersService = {
@@ -31,7 +31,7 @@ export const usersService = {
             return false;
         }
 
-        return true;
+        return user;
     },
 
     async _generateHash(password: string, salt: string) {

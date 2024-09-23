@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { HTTP_STATUSES } from "../utils";
 import { jwtService } from "../application/jwt-service";
-import { usersService } from "../domain/users-service";
+import { authService } from "../domain/auth-service";
 
 export const authMiddleware = async (req: Request, res: Response, next: NextFunction) => {
     if (!req.headers.authorization) {
@@ -13,7 +13,7 @@ export const authMiddleware = async (req: Request, res: Response, next: NextFunc
 
     const userId = await jwtService.getUserIdByToken(token);
     if (userId) {
-        req.user = await usersService.findUserById(userId);
+        req.user = await authService.findUserById(userId);
         next();
     } else {
         res.sendStatus(HTTP_STATUSES.UNAUTHORIZED_401);

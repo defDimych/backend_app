@@ -2,9 +2,9 @@ import express, { NextFunction, Request, Response } from 'express';
 import { getCoursesRouter } from './routes/courses';
 import { getTestsRouter } from './routes/tests';
 import { db } from './db/db-in-memory';
-import { usersRouter } from './routes/users-router';
 import { authRouter } from './routes/auth/auth-router';
 import { feedbacksRouter } from './routes/feedbacks/feedbacks-router';
+import { emailRouter } from './routes/email-router';
 
 
 export const app = express();
@@ -23,6 +23,6 @@ app.use(jsonBodyMiddleware);
 // app.use('/interesting', getInterestingRouter);
 app.use('/courses', getCoursesRouter());
 app.use('/__test__', getTestsRouter(db));
-app.use(usersRouter);
-app.use(authRouter);
+app.use('/auth', authRouter);
 app.use(feedbacksRouter)
+app.use(emailRouter);
